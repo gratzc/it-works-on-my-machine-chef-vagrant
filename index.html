@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=1024" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+
+	<!-- <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" /> -->
+
+	<!-- <link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700' rel='stylesheet' type='text/css'> -->
+
+	<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+
+	<link href="css/base.css" rel="stylesheet" />
+	<link href="css/ckh-preso.css" rel="stylesheet" />
+
+	<link rel="shortcut icon" href="favicon.png" />
+	<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+
+<body class="impress-not-supported theme-2">
+
+<div class="fallback-message">
+	<p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+	<p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<div id="impress">
+	<div id="intro" class="step" data-x="0" data-y="0">
+		<h1>How to be a Good Open Source Citizen!!</h1>
+		<p>by: Curt Gratz</p>
+	</div>
+
+	<div id="about-me" class="step" data-x="1000" data-y="1000">
+		<h1>Obligatory Who Am I</h1>
+	</div>
+
+	<div id="about-me-ckh" class="step" data-x="2000" data-y="2000">
+		<h3>Co-owner of<br />Computer Know How</h3>
+		<img src="images/ckh-logo.png" />
+	</div>
+
+	<div id="about-me-coldbox" class="step" data-x="3000" data-y="3000">
+		<h3>Member of TEAM ColdBox</h3>
+		<img src="images/coldbox-alliance.png" />
+	</div>
+
+	<div id="about-me-opencfml" class="step" data-x="4000" data-y="4000">
+		<h3>Open CFML Foundation</h3>
+		<img src="images/opencfml.png" />
+	</div>
+
+	<div id="about-me-family" class="step" data-x="5000" data-y="5000">
+		<h3>Husband/Dad</h3>
+		<img src="images/family.png" />
+	</div>
+
+	<div id="outline" class="step" data-x="6000" data-y="6000">
+		<h3>What will we be covering?</h3>
+		<ul>
+			<li>The Problem - “it works on my machine”</li>
+			<li>The Solution - Chef and Vagrant</li>
+			<li>Comparing stacks quickly using Chef and Vagrant</li>
+			<li>Setting up a “Vagrant File”</li>
+			<li>Provisioning options</li>
+		</ul>
+	</div>
+
+	<div id="problem" class="step" data-x="7000" data-y="7000">
+		<h3>The Problem</h3>
+		<img src="images/youre-hired.png" />
+	</div>
+
+	<div id="the-readme" class="step" data-x="8000" data-y="8000">
+		<h3>Solution 1: The Uber Reademe</h3>
+		If you're lucky....
+	</div>
+
+	<div id="install-party" class="step" data-x="9000" data-y="9000">
+		<h3>Install Party</h3>
+		<ul>
+			<li>Install Webserver (Apache,Ngnix,IIS)</li>
+			<li>Install CFML Engine (Adobe, Railo, Bluedragon)</li>
+			<li>Install DB (MSSQL, MySQL, Oracle, etc)</li>
+			<li>Install caching software (Couchbase, MongoDB, Terracotta)</li>
+		</ul>
+	</div>
+
+	<div id="config-party" class="step" data-x="10000" data-y="10000">
+		<h3>Config Party (oh wait, theirs more</h3>
+		<ul>
+			<li>Configure Webserver</li>
+			<li>Configure CFML Engine</li>
+			<li>Configure DB Server</li>
+			<li>Configure cache</li>
+		</ul>
+	</div>
+
+	<div id="setup-party" class="step" data-x="11000" data-y="11000">
+		<h3>Setup Party (nope, not done yet)</h3>
+		<ul>
+			<li>Get Code (clone repo, FTP, etc)</li>
+			<li>Restore DB, run scripts</li>
+			<li>Configure all the software to point to code</li>
+		</ul>
+	</div>
+
+	<div id="fail-readme" class="step" data-x="12000" data-y="12000">
+		<h3>PROBLEM</h3>
+		<ul>
+			<li>Prone to human error</li>
+			<li>Configuration errors</li>
+			<li>Quickly drop out of sync production</li>
+			<li>Requires special maintance</li>
+			<li>Heavy Maintance</li>
+			<li>Time Consuming</li>
+			<li>Platform specfic</li>
+		</ul>
+	</div>
+
+	<div id="the-setup-script" class="step" data-x="13000" data-y="13000">
+		<h3>Solution 2: The Setup Script</h3>
+		If you're lucky....
+	</div>
+
+	<div id="script-party" class="step" data-x="14000" data-y="14000">
+		<h3>Script Party</h3>
+		<ul>
+			<li>Get Script Code (clone repo, FTP, etc)</li>
+			<li>Configure script for your machine</li>
+			<li>Run script</li>
+		</ul>
+	</div>
+
+	<div id="fail-script" class="step" data-x="15000" data-y="15000">
+		<h3>PROBLEM</h3>
+		<ul>
+			<li>Configuration errors</li>
+			<li>Quickly drop out of sync production</li>
+			<li>Requires special maintance</li>
+			<li>Platform specfic</li>
+		</ul>
+	</div>
+
+	<div id="glhf" class="step" data-x="16000" data-y="16000">
+		<h3>Solution 3: GLHF</h3>
+		Good Luck Have Fun....
+	</div>
+
+	<div id="fail-glhf" class="step" data-x="17000" data-y="17000">
+		<h3>PROBLEM</h3>
+		<ul>
+			<li>Not Repeatable</li>
+			<li>Not Verifiable</li>
+			<li>Not Isolated</li>
+			<li>Difficult</li>
+			<li>SLOW,SLOW,SLOW</li>
+		</ul>
+	</div>
+
+
+	<div id="credits" class="step" data-x="59000" data-y="59000">
+		<h3>Credits</h3>
+		<ul>
+			<li><b>Mitchell Hashimoto:</b> <a href="https://www.youtube.com/watch?v=Im4wNqlolqQ">Automated Development Environments w/ Vagrant</a></li>
+		</ul>
+	</div>
+
+	<div id="contact" class="step" data-x="61000" data-y="61000">
+		<h3>Contact Info</h3>
+		<ul>
+			<li><b>Email:</b> <a href="mailto:gratzc@compknowhow.com">gratzc@compknowhow.com</a></li>
+			<li><b>Twitter:</b> gratzc</li>
+			<li><b>Blog:</b> <a href="http://www.coldbox.org/blog">www.coldbox.org/blog</a></li>
+			<li><b>Website:</b> <a href="http://www.compknowhow.com">www.compknowhow.com</a></li>
+			<li><b>League of Legends:</b> gratzc</li>
+			<li><b>Skype:</b> gratzc</li>
+		</ul>
+	</div>
+</div>
+
+<div class="hint">
+	<p>Use a spacebar or arrow keys to navigate</p>
+</div>
+
+<script>
+if ("ontouchstart" in document.documentElement) {
+	document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+
+</body>
+</html>
