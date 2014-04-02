@@ -1,0 +1,151 @@
+##
+# You should look at the following URL's in order to grasp a solid understanding
+# of Nginx configuration files in order to fully unleash the power of Nginx.
+# http://wiki.nginx.org/Pitfalls
+# http://wiki.nginx.org/QuickStart
+# http://wiki.nginx.org/Configuration
+#
+# Generally, you will want to move this file somewhere, and start with a clean
+# file but keep this around for reference. Or just disable in sites-enabled.
+#
+# Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.
+##
+
+server {
+
+	################### SERVER NAME AND PORT #####################
+	server_name CB203.local;
+	listen   80;
+
+	################### LOGS #####################
+	access_log /var/log/nginx/api_access.log;
+	error_log  /var/log/nginx/api_error.log warn;
+	rewrite_log on;
+
+	################### WEB ROOT #####################
+	root /opt/sites/CB203;
+	index index.htm index.html index.cfm;
+
+	################### ERROR PAGE #####################
+	#error_page 404 /404.html;
+
+	################### LOCATION: ROOT #####################
+	location / {
+		# First attempt to serve request as file or directory, else it sends it to the @rewrite location
+		try_files $uri $uri/ @rewrite;
+	}
+
+	################### RAILO ADMIN PROTECTION #####################
+	location ~* /railo-context/admin {
+		# include the external ip of the server or any other fixed ip
+		# in order to prevent access to Railo Admin by others.  Here it's set
+		# to server_ip so it can only be reached over with a connection over ssh
+		# to the server.
+
+		#UNCOMMENT ONCE READY
+		#allow 192.168.0.0/16;
+		#allow 10.100.0.0/16;
+		#deny all;
+
+		# Use Railo for it
+		include railo.conf;
+	}
+
+	################### REWRITE: COLDBOX SES RULES #####################
+	# Rewrite for ColdBox (only needed if you want SES urls with this framework)
+	# If you don't use SES urls you could do something like this
+	# Breaking here and including the railo proxy so we can handle implicit views.
+	# location ~ \.(cfm|cfml|cfc)(.*)$ {
+	location @rewrite {
+		rewrite ^/((?!core).)*$ /index.cfm/$request_uri break;
+		rewrite ^ /index.cfm break;
+		include railo.conf;
+	}
+
+	# Main Railo proxy handler
+	location ~ \.(cfm|cfml|cfc|jsp) {
+		# making sure the file actually exists in case its an implicit view
+		try_files $uri $uri/ @rewrite;
+		# include all proxy related settings from the proxy_params file for CF to process
+		include railo.conf;
+	}
+
+	################### LOCATION: STATIC FILES #####################
+	# This block will catch static file requests, such as images, css, js
+	# The ?: prefix is a 'non-capturing' mark, meaning we do not require
+	# ~* = case insensitive, ~ = case sensitive
+	# the pattern to be captured into $1 which should help improve performance
+	location ~* \.(?:ico|css|js|gif|jpe?g|png|bmp|html|htm)$ {
+		# Some basic cache-control for static files to be sent to the browser
+		expires max;
+		add_header Pragma public;
+		add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+	}
+
+	################### NON CF BLOCKING RULES #####################
+
+	# this prevents any aspx,php,jsp,cgi or perl files from being served
+	location ~ \.(aspx|php|pl|cgi|perl|prl)$ {
+		return 410;
+	}
+
+	################### SECURITY RULES #####################
+
+	# this prevents hidden files (beginning with a period) from being served
+	location ~ /\. {
+		access_log off; log_not_found off; deny all;
+	}
+
+	# deny access to .htaccess files, if Apache's document root
+	# concurs with nginx's one
+	location /\.ht {
+		access_log off; log_not_found off; deny all;
+	}
+
+	error_page 405 =200 @405;
+	location @405 {
+	  include railo.conf;
+	}
+
+}
+
+
+# another virtual host using mix of IP-, name-, and port-based configuration
+#
+#server {
+#     listen 8000;
+#     listen somename:8080;
+#     server_name somename alias another.alias;
+#     root html;
+#     index index.html index.htm;
+#
+#     location / {
+#          try_files $uri $uri/ /index.html;
+#     }
+#}
+
+
+# HTTPS server
+#
+#server {
+#     listen 443;
+#     server_name localhost;
+#
+#     root html;
+#     index index.html index.htm;
+#
+#     ssl on;
+#     ssl_certificate cert.pem;
+#     ssl_certificate_key cert.key;
+#
+#     ssl_session_timeout 5m;
+#
+#     ssl_protocols SSLv3 TLSv1;
+#     ssl_ciphers ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv3:+EXP;
+#     ssl_prefer_server_ciphers on;
+#
+#     location / {
+#          try_files $uri $uri/ /index.html;
+#     }
+#}
+
